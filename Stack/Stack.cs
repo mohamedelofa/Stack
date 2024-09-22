@@ -80,10 +80,5 @@ namespace Stack
 			}
             return result;
 		}
-
-        //public static explicit operator Stack(int[] arr)
-        //{
-
-        //}
     }
 }
