@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Stack
 {
-    internal class Stack
+    internal class Stack<T> : IStack<T>
     {
-        private int[] arr;
+        private T[] arr;
         public int Size { get; init; }
         public int Top { get; private set; } = 0;
         public Stack(int size)
         {
             Size = size;
-            arr = new int[size];
+            arr = new T[size];
         }
-        public void Push(int value)
+        public void Push(T value)
         {
             if(Top < Size)
             {
@@ -29,7 +29,7 @@ namespace Stack
                 Console.WriteLine("Stack is already Full");
             }
         }
-        public int Pop()
+        public T Pop()
         {
             if(Top > 0)
             {
@@ -38,26 +38,31 @@ namespace Stack
             }
             else
             {
-                return -1;
+                return default;
             }
         }
-        public int Last()
+        public T Last()
         {
             if (Top == 0)
             {
-                return -1;
+                return default;
             }
             else
                 return arr[Top - 1];
         }
 
-        //indexer
-        public int this[int ind]
+		public T GetByIndex(int idx)
+		{
+			return this[idx];
+		}
+
+		//indexer
+		public T this[int ind]
         {
             get
             {
                 if(ind < 0 || ind >= Size)
-                    return -1;
+                    return default;
                 else
                     return arr[ind];
             }
@@ -65,11 +70,11 @@ namespace Stack
 
 
         // Operator OverLoading
-        public static Stack operator +(Stack left,Stack right)
+        public static Stack<T> operator +(Stack<T> left,Stack<T> right)
         {
             int size1 = left.Size;
             int size2 = right.Size;
-            Stack result = new Stack(size1+size2);
+            Stack<T> result = new Stack<T>(size1+size2);
             for(int i = 0; i < left.Top; i++)
             {
                 result.Push(left.arr[i]);

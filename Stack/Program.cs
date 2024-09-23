@@ -9,8 +9,8 @@ namespace Stack
 		static string[] stacks = { " Stack1 ", " Stack2 ", " Stack1 + Stack2 ", " Exit " };
 		static int mainHeight = 0;
 		static int stackHeight = 0;
-		static Stack stack1= default;
-		static Stack stack2 = default;
+		static Stack<int> stack1= default;
+		static Stack<int> stack2 = default;
 		static void Main(string[] args)
 		{
 			while(true)
@@ -61,7 +61,7 @@ namespace Stack
 							{
 								Console.Write($"Enter size of stack 1 : ");
 								int stack1Size = int.Parse(Console.ReadLine());
-								stack1 = new Stack(stack1Size);
+								stack1 = new Stack<int>(stack1Size);
 							}
 							StackScreen(1);
 							MoveOnStackScreen(stack1 , 1);
@@ -71,7 +71,7 @@ namespace Stack
                             {
 								Console.Write($"Enter size of stack 2 : ");
 								int stack2Size = int.Parse(Console.ReadLine());
-								stack2 = new Stack(stack2Size);
+								stack2 = new Stack<int>(stack2Size);
 							}
 							StackScreen(2);
 							MoveOnStackScreen(stack2 , 2);
@@ -85,7 +85,7 @@ namespace Stack
 							}
 							else
 							{
-								Stack stack3 = stack1 + stack2;
+								Stack<int> stack3 = stack1 + stack2;
 								StackScreen(3);
 								MoveOnStackScreen(stack3, 3);
 							}
@@ -115,7 +115,7 @@ namespace Stack
 		}
 
 
-		static void MoveOnStackScreen(Stack stack , int stacknumber)
+		static void MoveOnStackScreen(Stack<int> stack , int stacknumber)
 		{
 			while(true)
 			{
@@ -147,7 +147,7 @@ namespace Stack
 							case 1:
 								//Console.Clear();
 								int v = stack.Pop();
-								if (v == -1)
+								if (v == default)
 									Console.WriteLine("No number to pop");
 								else
 								{
@@ -159,7 +159,7 @@ namespace Stack
 							case 2:
 								//Console.Clear();
 								int last = stack.Last();
-								if (last == -1)
+								if (last == default)
 									Console.WriteLine("No number exist");
 								else
 								{
@@ -177,7 +177,7 @@ namespace Stack
 								else
 								{
 									int x = stack.Pop();
-									while (x != -1)
+									while (x != default)
 									{
 										Console.WriteLine($"Number = {x}");
 										x = stack.Pop();
@@ -187,7 +187,6 @@ namespace Stack
 								Console.ReadKey();
 								break;
 							case 4:
-								//Console.Clear();
 								if (stack.Top == 0)
 								{
 									Console.WriteLine("No numbers to display");
